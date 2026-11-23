@@ -42,7 +42,7 @@ td{padding:9px 8px;border-bottom:1px solid var(--ln)}tr:nth-child(even) td{backg
 select:disabled,input:disabled{background:#f0f2f5!important;color:#8c8c8c!important;border-color:#d9d9d9!important;cursor:not-allowed!important;opacity:.88}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) select:disabled,:root:not([data-theme="light"]) input:disabled{background:#262626!important;color:#777!important;border-color:#3a3a3a!important}}
 .ops span{font-size:13px!important;margin:0 6px}
-/* 用户点控管理专用样式：前7列冻结(复选框~目标金额)，控分状态单行，备注加宽 */
+/* 点控用户管理专用样式：前7列冻结(复选框~目标金额)，控分状态单行，备注加宽 */
 #p3 table{width:max-content;min-width:100%}
 #p3 th,#p3 td{white-space:nowrap}
 #p3 .col-rm{min-width:210px;max-width:260px;white-space:normal;word-break:break-all;text-align:left}
@@ -969,7 +969,7 @@ $('#gb').onclick=()=>{
   M.querySelector('#bs').onclick=()=>{if(!rows.length)return toast('请至少保留一条数据');if(!rows.some(r=>r.st=='进行中'))return toast('所选数据中没有“进行中”的记录，无需解除');cfm(()=>{const n=rel(rows.map(r=>r.id));M.remove();toast(`修改成功（已解除 ${n} 条）`)})};
 };
 
-/* ===== 4. 用户点控管理（仅对MY系列全部游戏生效） ===== */
+/* ===== 4. 点控用户管理（仅对MY系列全部游戏生效） ===== */
 $('#cM').innerHTML=opt(ALL_MERCHANTS,1);
 
 const CTRL_API_CODE={
@@ -1226,7 +1226,7 @@ function openCtrlRemarkModal(r){
     if(inp.value.length>100)return bad(inp,'备注不能超过100个字符');
     r.rm=inp.value.trim();
     r.op='System';r.ot=now();
-    logMasterOp('用户点控管理','修改备注',r.mch,`会员ID:${r.uid} 更新备注:${r.rm}`);
+    logMasterOp('点控用户管理','修改备注',r.mch,`会员ID:${r.uid} 更新备注:${r.rm}`);
     M.remove();cDraw();toast('备注已更新');
   };
 }
@@ -1241,7 +1241,7 @@ function stopSingleCtrl(r){
     r.op='System';
     r.ot=r.endTime;
     cSel.delete(r.seq);
-    logMasterOp('用户点控管理','结束控分',r.mch,`会员ID:${r.uid} 提前结束控分`);
+    logMasterOp('点控用户管理','结束控分',r.mch,`会员ID:${r.uid} 提前结束控分`);
     C.remove();cDraw();toast('已结束控分 1 条');
   };
 }
@@ -1291,7 +1291,7 @@ $('#cBatch').onclick=()=>{
         r.ot=t;
         cSel.delete(r.seq);
       });
-      logMasterOp('用户点控管理','批量结束控分','多商户',`批量结束控分 ${rows.length} 条`);
+      logMasterOp('点控用户管理','批量结束控分','多商户',`批量结束控分 ${rows.length} 条`);
       C.remove();M.remove();cDraw();
       toast(`已结束控分${rows.length}条`);
     };
@@ -1458,7 +1458,7 @@ function openAddCtrlModal(){
         rm:''
       });
     });
-    logMasterOp('用户点控管理','添加点控',selMch,`新增${ids.length}条[${acType.value}-${acMode.value}(API:${CTRL_API_CODE[acMode.value]})] 目标金额:${amtNum.toFixed(2)}`);
+    logMasterOp('点控用户管理','添加点控',selMch,`新增${ids.length}条[${acType.value}-${acMode.value}(API:${CTRL_API_CODE[acMode.value]})] 目标金额:${amtNum.toFixed(2)}`);
     M.remove();
     cState.cur=1;
     cDraw();
@@ -1521,7 +1521,7 @@ function openEditCtrlModal(r){
       r.targetAmt=+newAmt.toFixed(2);
       r.op='System';
       r.ot=now();
-      logMasterOp('用户点控管理','编辑点控',r.mch,`会员ID:${r.uid} 修改目标金额为${r.targetAmt.toFixed(2)}`);
+      logMasterOp('点控用户管理','编辑点控',r.mch,`会员ID:${r.uid} 修改目标金额为${r.targetAmt.toFixed(2)}`);
       M.remove();cDraw();toast('配置已生效');
     };
 
@@ -1539,7 +1539,7 @@ function openEditCtrlModal(r){
         r.op='System';
         r.ot=t;
         cSel.delete(r.seq);
-        logMasterOp('用户点控管理','编辑点控并结束',r.mch,`会员ID:${r.uid} 累计${labelWord}${r.execAmt.toFixed(2)}超过新目标${r.targetAmt.toFixed(2)}，立即结束`);
+        logMasterOp('点控用户管理','编辑点控并结束',r.mch,`会员ID:${r.uid} 累计${labelWord}${r.execAmt.toFixed(2)}超过新目标${r.targetAmt.toFixed(2)}，立即结束`);
         C.remove();M.remove();cDraw();
         toast(`配置已生效 ，该会员${labelWord}已结束`);
       };
@@ -1594,7 +1594,7 @@ const ALL_PAGES=[
   {idx:0,name:'子平台游戏配置',visible:SHOW_SUB_PLATFORM_CONFIG},
   {idx:1,name:'AI游戏返奖率配置',visible:true},
   {idx:2,name:'保护玩家记录',visible:true},
-  {idx:3,name:'用户点控管理',visible:true}
+  {idx:3,name:'点控用户管理',visible:true}
 ];
 const VISIBLE_PAGES=ALL_PAGES.filter(p=>p.visible);
 
