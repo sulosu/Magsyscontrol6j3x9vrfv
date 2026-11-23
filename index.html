@@ -1298,11 +1298,11 @@ $('#cBatch').onclick=()=>{
   };
 };
 
-// 添加用户点控窗口（3-3）
+// 添加点控用户窗口（3-3）
 const ADD_CTRL_MERCHANTS=['156','222','666','999','888'];
 function openAddCtrlModal(){
   const defaultMch=(cState.mch && cState.mch!='全部' && ADD_CTRL_MERCHANTS.includes(cState.mch))?cState.mch:ADD_CTRL_MERCHANTS[0];
-  const M=modal(`<div class="mb-4 text-base font-semibold">添加用户点控</div>
+  const M=modal(`<div class="mb-4 text-base font-semibold">添加点控用户</div>
     <div class="fi mb-3 flex items-center gap-2">
       <label style="width:90px">选择商户:</label>
       <select id="acMch" style="width:260px">${opt(ADD_CTRL_MERCHANTS)}</select>
@@ -1466,9 +1466,9 @@ function openAddCtrlModal(){
   };
 }
 
-// 编辑用户点控窗口（4-1）
+// 编辑点控用户窗口（4-1）
 function openEditCtrlModal(r){
-  const M=modal(`<div class="mb-4 text-base font-semibold">编辑用户点控</div>
+  const M=modal(`<div class="mb-4 text-base font-semibold">编辑点控用户</div>
     <div class="fi mb-3 flex items-center gap-2">
       <label style="width:90px">选择商户:</label>
       <select id="ecMch" disabled style="width:260px"><option value="${r.mch}" selected>${r.mch}</option></select>
